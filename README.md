@@ -85,10 +85,10 @@ Later on, when alerts are received, they should be visible in the AlertManager's
 Switch to the Developer view in the RedHat OpenShift web-console and add a new Deployment from container images using the S2I function.
 ![deploy-snmp-exporter](images/deploy-snmp-exporter-01.png)
 
-The container to be deployed is the `snmp-exporter-test` which has been specially packaged for this demo. It contains the `snmp-exporter` plugin from Prometheus that will translate SNMP information (using snmp walk/get methods) from a locally installed `snmpd`
+The container to be deployed is the `snmp-exporter-test` which has been specially packaged for this demo. It contains the `snmp-exporter` plugin from Prometheus that will translate SNMP information (using snmp walk/get methods) from a locally installed `snmpd`. The image is located at `quay.io/avitui/snmp_exporter_test`.
 ![deploy-snmp-exporter-setup](images/deploy-snmp-exporter-02.png)
 
-The image is located at `quay.io/avitui/snmp_exporter_test`. When doing the deployment ensure the Route configuration is configured to `secure with edge termination` and `redirect insecure connections` options and it is pointing to port `9116`, the port of snmp-exporter. Prometheus will scrape this port for events.
+When doing the deployment ensure the Route configuration is configured to `secure with edge termination` and `redirect insecure connections` options and it is pointing to port `9116`, the port of snmp-exporter. Prometheus will scrape this port for events.
 ![deploy-snmp-exporter-port](images/deploy-snmp-exporter-03.png)
 
 Wait until the deployment completes. You can check that by verifying the pod readiness using
@@ -154,7 +154,7 @@ Similar to step 6, deploy the wiremock container to respond to alerts dispatched
 The container image is `quay.io/avitui/wiremock_for_alertmanager_test` and the running port should be `7777`.
 
 ### Step 11
-Setup AlerManager to send out notifications
+Setup AlertManager to send out notifications
 ```
 oc apply -f 11_alertmanagerconfig-snmpdemo-alertconfig.yaml
 ```
@@ -178,7 +178,7 @@ Deploy the Grafana dashboard
 oc apply -f 14_grafanadashboard-snmp-exp-demo.yaml
 ```
 Once deployed the dashboard (inside the Grafana UI accessible via the Networking->Routes menu of the RedHat OpenShift Console Administrator mode view) should look like below:
-![grafana-dashboard](images/grafana-dashboard.png)
+![grafana-dashboard](images/grafana-dashboard-01.png)
 
 
 ### Step 15.
