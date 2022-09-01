@@ -1,0 +1,21 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: prometheus-snmp-demo
+  namespace: snmp-demo
+  labels:
+    operated-prometheus: 'true'
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: prometheus-operated
+    weight: 100
+  port:
+    targetPort: web
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+

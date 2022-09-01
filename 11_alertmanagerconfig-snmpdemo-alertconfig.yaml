@@ -1,0 +1,20 @@
+﻿kind: AlertmanagerConfig
+apiVersion: monitoring.coreos.com/v1alpha1
+metadata:
+  name: snmpdemo-alertconfig
+  labels:
+    team: demo
+  namespace: snmp-demo
+spec:
+  receivers:
+    - name: mock
+      webhookConfigs:
+        - url: 'http://wiremock-for-alertmanager.snmp-demo.svc.cluster.local:7777/mock'
+  route:
+    groupBy:
+      - alertname
+      - cluster
+    groupInterval: 20s
+    groupWait: 5s
+    receiver: mock
+    repeatInterval: 1m

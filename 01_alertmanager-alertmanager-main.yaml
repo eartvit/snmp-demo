@@ -1,0 +1,14 @@
+﻿kind: Alertmanager
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: alertmanager-main
+  namespace: snmp-demo
+  labels:
+    team: demo
+spec:
+  replicas: 3
+  alertmanagerConfigSelector:
+    matchLabels:
+      team: demo
+  logLevel: info
+

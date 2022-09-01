@@ -1,0 +1,32 @@
+﻿kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: prometheus-snmp-exporter-rules
+  namespace: snmp-demo
+  labels:
+    team: demo
+spec:
+  groups:
+    - name: memory-over-threshold
+      rules:
+        - alert: alert-memory-over-20
+          annotations:
+            description: The memory usage of the host is over 20%
+            summary: Host memory usage over 20%
+          expr: 100*(memTotalReal-memAvailReal)/memTotalReal > 20
+          labels:
+            severity: warning
+        - alert: alert-memory-over-50
+          annotations:
+            description: The memory usage of the host is over 50%
+            summary: Host memory usage over 50%
+          expr: 100*(memTotalReal-memAvailReal)/memTotalReal > 50
+          labels:
+            severity: major
+        - alert: alert-memory-over-70
+          annotations:
+            description: The memory usage of the host is over 70%
+            summary: Host memory usage over 70%
+          expr: 100*(memTotalReal-memAvailReal)/memTotalReal > 70
+          labels:
+            severity: critical

@@ -1,0 +1,20 @@
+﻿kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: ucd-snmp-service-monitor
+  namespace: snmp-demo
+  labels:
+    team: demo
+spec:
+  endpoints:
+    - interval: 5s
+      params:
+        module:
+          - ucd_snmp
+        target:
+          - 127.0.0.1
+      path: /snmp
+      port: 9116-tcp
+  selector:
+    matchLabels:
+      app: snmp-exporter-test

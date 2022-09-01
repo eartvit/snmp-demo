@@ -1,0 +1,21 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: alert-manager-snmp-demo
+  namespace: snmp-demo
+  labels:
+    operated-alertmanager: 'true'
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: alertmanager-operated
+    weight: 100
+  port:
+    targetPort: web
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+

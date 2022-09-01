@@ -1,0 +1,14 @@
+﻿kind: GrafanaDataSource
+apiVersion: integreatly.org/v1alpha1
+metadata:
+  namespace: snmp-demo
+  name: prom-ds-snmp-demo
+  labels:
+    team: demo
+spec:
+  name: prom-ds-snmp-demo
+  datasources:
+    - name: prometheus-ds-snmp-demo
+      type: prometheus
+      url: http://prometheus-operated.snmp-demo.svc.cluster.local:9090
+

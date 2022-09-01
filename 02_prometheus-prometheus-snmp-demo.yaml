@@ -1,0 +1,27 @@
+﻿apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus-snmp-demo
+  namespace: snmp-demo
+spec:
+  evaluationInterval: 5s
+  scrapeInterval: 5s
+  alerting:
+    alertmanagers:
+      - namespace: snmp-demo
+        name: alertmanager-operated
+        port: web
+  podMonitorSelector:
+    matchLabels:
+      team: demo
+  probeSelector:
+    matchLabels:
+      team: demo
+  ruleSelector:
+    matchLabels:
+      team: demo
+  serviceMonitorSelector:
+    matchLabels:
+      team: demo
+  replicas: 2
+  serviceAccountName: prometheus-k8s
